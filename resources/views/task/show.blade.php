@@ -13,6 +13,10 @@
             <th>タスク</th>
             <td>{{ $tasks->content }}</td>
         </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>{{ $tasks->status }}</td>
+        </tr>
     </table>
 {!! link_to_route('tasks.edit', 'このタスクを編集', ['task' => $tasks->id], ['class' => 'btn btn-light']) !!}
 {!! Form::model($tasks, ['route' => ['tasks.destroy', $tasks->id], 'method' => 'delete']) !!}
