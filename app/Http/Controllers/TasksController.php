@@ -18,7 +18,7 @@ class TasksController extends Controller
         //メッセージを所得する
         $tasks=Task::all();
         
-        return view('task.index' , [
+        return view('welcome' , [
           'tasks' =>$tasks,
             ]);
     }
