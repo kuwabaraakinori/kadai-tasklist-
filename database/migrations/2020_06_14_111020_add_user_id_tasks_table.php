@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMicropostsTable extends Migration
+class AddUserIdTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateMicropostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('microposts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::table('tasks', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->string('content');
-            $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -30,6 +27,8 @@ class CreateMicropostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('microposts');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }
