@@ -61,7 +61,7 @@ class TasksController extends Controller
         
          $this->validate($request, [
              'content' =>'required|max:10',
-            'status' => 'required|max:100',   
+            'status' => 'required|max:20',   
         ]);
         
         $tasks=new Task;
@@ -124,6 +124,17 @@ class TasksController extends Controller
             'status' => 'required|max:10',   
         ]);
         
+        $tasks = \App\Task::find($id);
+        
+        if (\Auth::id() === $tasks->user_id) {
+            $tasks->content = $request->content;
+            $tasks->status=$request->status;
+            $tasks->save();
+        }
+        
+        return redirect('/');
+        
+        /*
         $tasks=Task::findOrFail($id);
         
         $tasks->content = $request->content;
@@ -131,6 +142,7 @@ class TasksController extends Controller
         $tasks->save();
         
         return redirect('/');
+        */
     }
 
     /**
